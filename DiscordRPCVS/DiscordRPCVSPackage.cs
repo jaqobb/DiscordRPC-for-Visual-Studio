@@ -163,13 +163,10 @@ namespace DiscordRPCVS
                             SmallImageText = Settings.largeLanguage ? $"Visual Studio {ideVersion}" : supported ? language[1] : "Unrecognized extension"
                         };
 
-                        if (Settings.showFileName)
-                            Presence.Details = document != null ? Path.GetFileName(document.FullName) : "No file.";
-
                         if (Settings.showSolutionName)
                         {
                             bool idling = ide.Solution == null || ide.Solution.FullName == string.Empty || ide.Solution.FullName == null;
-                            Presence.State = idling ? "Idling" : $"Developing {Path.GetFileNameWithoutExtension(ide.Solution.FileName)}";
+                            Presence.Details = idling ? "Idling" : Path.GetFileNameWithoutExtension(ide.Solution.FileName);
                             if (idling)
                                 Assets = new Assets()
                                 {
@@ -177,6 +174,9 @@ namespace DiscordRPCVS
                                     LargeImageText = $"Visual Studio {ideVersion}"
                                 };
                         }
+
+                        if (Settings.showFileName)
+                            Presence.State = document != null ? $"Editing {Path.GetFileName(document.FullName)}" : "";
 
                         if (Settings.showTimestamp && document != null)
                         {
