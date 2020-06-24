@@ -176,7 +176,17 @@ namespace DiscordRPCVS
                         }
 
                         if (Settings.showFileName && document != null)
-                            Presence.State = $"Editing {Path.GetFileName(document.FullName)}";
+                        {
+                            FileInfo fileInfo = new FileInfo(document.FullName);
+                            if (fileInfo.IsReadOnly)
+                            {
+                                Presence.State = $"Reading {fileInfo.Name}";
+                            }
+                            else
+                            {
+                                Presence.State = $"Editing {fileInfo.Name}";
+                            }
+                        }
 
                         if (Settings.showTimestamp && document != null)
                         {
