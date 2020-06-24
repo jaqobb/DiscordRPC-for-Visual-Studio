@@ -8,7 +8,7 @@
 **CHANGES**
 - Huge optimizations.
 - Added license, and changelog to installer and more info url.
-- Made changelog more excited. 
+- Made changelog more excited.
 
 >_WEW!_
 

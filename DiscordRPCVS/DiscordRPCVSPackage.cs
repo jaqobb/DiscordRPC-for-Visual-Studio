@@ -166,17 +166,17 @@ namespace DiscordRPCVS
                         if (Settings.showSolutionName)
                         {
                             bool idling = ide.Solution == null || ide.Solution.FullName == string.Empty || ide.Solution.FullName == null;
-                            Presence.Details = idling ? "Idling" : Path.GetFileNameWithoutExtension(ide.Solution.FileName);
                             if (idling)
                                 Assets = new Assets()
                                 {
                                     LargeImageKey = $"vs{ideVersion}",
                                     LargeImageText = $"Visual Studio {ideVersion}"
                                 };
+                            Presence.Details = idling ? "Idling" : Path.GetFileNameWithoutExtension(ide.Solution.FileName);
                         }
 
-                        if (Settings.showFileName)
-                            Presence.State = document != null ? $"Editing {Path.GetFileName(document.FullName)}" : "";
+                        if (Settings.showFileName && document != null)
+                            Presence.State = $"Editing {Path.GetFileName(document.FullName)}";
 
                         if (Settings.showTimestamp && document != null)
                         {
